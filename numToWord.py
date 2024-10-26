@@ -6,26 +6,32 @@ inputNum = int(input("Enter number: "))
 def numToWord(inputNum):
         units = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
         tens = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
-        finalWord = ""
+        Word = ""
         if (inputNum == 0):
-            finalWord == "Zero"
+            Word == "Zero"
+        if inputNum >= 10000000:
+            Word = numToWord(inputNum // 10000000) + " crore"
+            inputNum %= 10000000
+        if inputNum >= 100000:
+            Word += Word + " " + numToWord(inputNum // 100000) + " lakh"
+            inputNum %= 100000
         if inputNum > 1000:
-            finalWord = numToWord(inputNum // 1000) + " " + "thousand"
+            Word = Word + " " + numToWord(inputNum // 1000) + " " + " thousand"
             inputNum %= 1000
         if inputNum >= 100:
-            finalWord = finalWord + units[(inputNum // 100) - 1] + " " + "hundred"
+            Word = Word + " " + units[(inputNum // 100) - 1] + " " + " hundred"
             inputNum %= 100
         if inputNum >= 20:
-            finalWord = finalWord + " " + tens[(inputNum // 10) - 2] + " "
+            Word = Word + " " + tens[(inputNum // 10) - 2] + " "
             inputNum %= 10
         if inputNum > 0:
-            finalWord = finalWord + " " + units[inputNum - 1]
-        return finalWord
+            Word = Word + " " + units[inputNum - 1]
+        return Word
 
 
 if __name__ == "__main__":
-    Word = numToWord(inputNum)
-    print(Word)
+    finalWord = numToWord(inputNum)
+    print(finalWord)
 
 
 
